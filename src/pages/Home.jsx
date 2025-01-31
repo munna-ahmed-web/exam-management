@@ -45,6 +45,7 @@ const Home = () => {
     <>
       <CommonWrapper className="flex gap-8">
         <ExamCard />
+        <p>this is new home by eitty</p>
         <Input
           isClearable
           onChange={(e) => {
@@ -98,6 +99,7 @@ const Home = () => {
           total={Math.ceil(data?.meta?.total / perPage)}
         />
       </CommonWrapper>
+      
     </>
   );
 };
