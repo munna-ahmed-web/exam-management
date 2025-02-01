@@ -100,10 +100,10 @@ const SignIn = () => {
       exit="exit"
       className="  relative  min-h-screen"
     >
-      <Link to={"/"}>
+      {/* <Link to={"/"}>
         <Icons.logoICon className=" absolute hidden md:flex  text-danger  top-10 left-10" />
-      </Link>
-      <p className="text-red-500">Hello world</p>
+      </Link> */}
+
       {/* <Helmet>
         <title>Sign In | Jobify</title>
         <link rel="canonical" href="https://jobify-bd6c2.web.app/" />
@@ -111,17 +111,24 @@ const SignIn = () => {
 
       <div className=" w-full min-h-screen  mx-auto md:grid grid-cols-3  h-full   items-center justify-center">
         <div className="banner-Container flex-1 hidden md:flex  col-span-2   justify-center items-center  h-full w-full dark:bg-darkish    bg-no-repeat  mx-auto  ">
-          <Player
+          {/* <Player
             autoplay
             loop
             src="https://lottie.host/a1a5f6ba-fffd-4887-a289-638b75651637/gFaYX8uQLu.json"
             style={{ height: "500px", width: "500px" }}
-          ></Player>
+          ></Player> */}
+          <img
+            src="/src/assets/8609249_3966070.jpg"
+            alt=""
+            style={{ height: "500px", width: "500px" }}
+          />
         </div>
         <div className="flex-1 w-full  min-h-screen  flex justify-center items-center mx-auto">
           <Card className="bg-transparent border-none w-full p-4 md:p-10  ">
             <CardHeader className="flex flex-col gap-4">
-              <p className="text-2xl font-medium">Sign in to Healthfiy</p>
+              <p className="text-2xl font-medium">
+                Sign in to Exam Management System
+              </p>
               <p className="text-sm ">
                 New user?{" "}
                 <Link to={"/signup"} className="text-danger hover:underline">
@@ -223,7 +230,8 @@ const SignIn = () => {
                 >
                   Login
                 </Button>
-                <div className="relative flex items-center">
+                {/* optional gmail login system */}
+                {/* <div className="relative flex items-center">
                   <Divider className="flex-1" />
                   <div className="relative flex justify-center text-xs uppercase">
                     <span className=" px-2 text-muted-foreground">Or</span>
@@ -250,7 +258,7 @@ const SignIn = () => {
                 >
                   <Icons.google className="mr-2 h-4 w-4" />
                   Continue with Google
-                </Button>
+                </Button> */}
               </form>
             </CardContent>
             <CardFooter></CardFooter>
