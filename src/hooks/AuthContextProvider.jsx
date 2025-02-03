@@ -26,6 +26,8 @@ const AuthProvider = ({ children }) => {
   const [loginChecking, setLoginChecking] = useState(true);
   const token = Cookies.get("user");
 
+  console.log("checking token from auth provider", token);
+
   useEffect(() => {
     const checkUserAuthentication = async () => {
       try {
