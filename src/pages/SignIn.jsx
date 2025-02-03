@@ -183,10 +183,10 @@ const SignIn = () => {
                   defaultValue=""
                   rules={{
                     required: "Password is required",
-                    minLength: {
-                      value: 6,
-                      message: "Password is incorrect",
-                    },
+                    // minLength: {
+                    //   value: 6,
+                    //   message: "Password is incorrect",
+                    // },
                   }}
                   render={({ field }) => (
                     <div>
