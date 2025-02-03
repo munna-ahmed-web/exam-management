@@ -45,12 +45,15 @@ const SignIn = () => {
   const onSuccess = (res) => {
     console.log(res, "res");
 
-    toast.success("Successfully Logged In");
+    toast.success("Successfully Logged In", { position: "top-right" });
 
-    Cookies.set("user", res?.data?.data?.accessToken, { expires: 30 });
-    setUser(res?.data?.data?.user);
+    // Cookies.set("user", res?.data?.data?.accessToken, { expires: 30 });
+    Cookies.set("user", res?.data?.approvalToken, { expires: 30 });
+    // setUser(res?.data?.data?.user);
+    setUser(res?.data);
     setIsLoading(false);
-    navigate(path || "/admin");
+    // navigate(path || "/admin");
+    navigate(path || "/");
   };
   const onError = (err) => {
     console.log(err);
@@ -58,12 +61,11 @@ const SignIn = () => {
     toast.error(err?.response?.data?.message || "Something went wrong");
     setIsLoading(false);
   };
-  const { mutate } = usePostMutate("/auth/login", onSuccess, onError);
+  const { mutate } = usePostMutate("/api/v1/auth/login", onSuccess, onError);
 
   const onSubmit = async (userData) => {
     setIsLoading(true);
-
-    console.log(userData);
+    // console.log(userData);
     mutate(userData);
   };
 
