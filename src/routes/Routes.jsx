@@ -5,8 +5,7 @@ import NotFound from "../pages/NotFound";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import QuestionDetails from "../pages/QuestionDetails";
-import AllQuestionPaperForExamineer from "../pages/AllQuestionPaperForExamineer";
-
+import ALLQuestionDetails from "../pages/AllQuestionPaperForExamineer";
 
 const routes = createBrowserRouter([
   {
@@ -36,7 +35,7 @@ const routes = createBrowserRouter([
       {
         index: true,
         path: "/allQuestionPaperForExamineer",
-        element: <AllQuestionPaperForExamineer />,
+        element: <ALLQuestionDetails />,
       },
     ],
   },
