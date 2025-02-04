@@ -22,31 +22,28 @@ import Info from "@/assets/icons/InfoIcon";
 import useAxiosSecure from "@/hooks/useAxios";
 
 const SignIn = () => {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const navigate = useNavigate();
+  const Axios = useAxiosSecure();
   const { user, setUser, googleSignIn } = useContext(AuthContext);
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, []);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
-
     formState: { errors },
   } = useForm();
-  const location = useLocation();
 
+  const location = useLocation();
   const { path } = location.state || {};
   const [isVisible, setIsVisible] = useState(false);
+
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate("/");
+  //   }
+  // }, []);
+
   const onSuccess = (res) => {
-    console.log(res, "res");
-
     toast.success("Successfully Logged In", { position: "top-right" });
-
     // Cookies.set("user", res?.data?.data?.accessToken, { expires: 30 });
     Cookies.set("user", res?.data?.approvalToken, { expires: 30 });
     // setUser(res?.data?.data?.user);
@@ -55,22 +52,20 @@ const SignIn = () => {
     // navigate(path || "/admin");
     navigate(path || "/");
   };
+
   const onError = (err) => {
-    console.log(err);
-    //     console.log(err?.response?.data?.message);
     toast.error(err?.response?.data?.message || "Something went wrong");
     setIsLoading(false);
   };
+
   const { mutate } = usePostMutate("/api/v1/auth/login", onSuccess, onError);
 
   const onSubmit = async (userData) => {
     setIsLoading(true);
-    // console.log(userData);
     mutate(userData);
   };
 
   const toggleVisibility = () => setIsVisible(!isVisible);
-  const Axios = useAxiosSecure();
 
   const providerSignIn = async (payload) => {
     const token = await payload.user.getIdToken();
@@ -183,10 +178,10 @@ const SignIn = () => {
                   defaultValue=""
                   rules={{
                     required: "Password is required",
-                    minLength: {
-                      value: 6,
-                      message: "Password is incorrect",
-                    },
+                    // minLength: {
+                    //   value: 6,
+                    //   message: "Password is incorrect",
+                    // },
                   }}
                   render={({ field }) => (
                     <div>

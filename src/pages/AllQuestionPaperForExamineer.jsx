@@ -1,40 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
-
+import useFetchQuery from "../hooks/shared/useFetch";
 
 function AllQuestionPaperForExamineer() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { data, isLoading, isSuccess, refetch } = useFetchQuery(
+    "/api/v1/questionPaper/allQuestionPapersOfExaminee"
+  );
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch(
-          "/api/v1/questionPaper/allQuestionPapersOfExaminee"
-        );
-        const data = await response.json();
-        setUsers(data);
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  console.log("printed by munna", data);
 
-    fetchUsers();
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return <p>Loading...</p>;
   }
   return (
     <div className="overflow-x-auto shadow-xl rounded-lg border border-gray-200">
-      <table className="min-w-full text-sm text-left text-gray-500">
+      {/* <table className="min-w-full text-sm text-left text-gray-500">
         <thead className="bg-gray-50 text-xs text-gray-700 uppercase">
           <tr>
             <th className="px-6 py-3">Name</th>
-            {/* <th className="px-6 py-3">Age</th> */}
             <br />
             <th className="px-6 py-3">Email</th>
             <th className="px-6 py-3 text-center">Actions</th>
@@ -57,7 +40,8 @@ function AllQuestionPaperForExamineer() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
+      <h1>Data fetched successfully</h1>
     </div>
   );
 }

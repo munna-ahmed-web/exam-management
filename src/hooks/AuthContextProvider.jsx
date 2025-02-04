@@ -35,13 +35,13 @@ const AuthProvider = ({ children }) => {
           },
         });
         if (response.status === 200 && response.data.success) {
-          setUser(response.data.data.user);
+          // setUser(response.data.data.user);
         } else {
-          setUser(null);
+          // setUser(null);
         }
       } catch (error) {
         console.error("Error checking user authentication:", error);
-        setUser(null);
+        // setUser(null);
       } finally {
         setLoginChecking(false);
       }
