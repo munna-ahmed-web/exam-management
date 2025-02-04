@@ -7,7 +7,6 @@ import SignUp from "../pages/SignUp";
 import QuestionDetails from "../pages/QuestionDetails";
 import AllQuestionPaperForExamineer from "../pages/AllQuestionPaperForExamineer";
 
-
 const routes = createBrowserRouter([
   {
     path: "/",
