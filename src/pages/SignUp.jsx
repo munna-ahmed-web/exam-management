@@ -34,11 +34,11 @@ const SignUp = () => {
 
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate("/");
+  //   }
+  // }, []);
 
   const {
     control,
