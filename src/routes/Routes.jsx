@@ -7,6 +7,11 @@ import SignUp from "../pages/SignUp";
 import QuestionDetails from "../pages/QuestionDetails";
 import AllQuestionPaperForExamineer from "../pages/AllQuestionPaperForExamineer";
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> c65e4e73394edae2ff26cdcb1c7bf09450fa5510
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -32,6 +37,7 @@ const routes = createBrowserRouter([
         path: "/question/:id",
         element: <QuestionDetails />,
       },
+     
       {
         index: true,
         path: "/allQuestionPaperForExamineer",
