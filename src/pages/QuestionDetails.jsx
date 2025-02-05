@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import useFetchQuery from "../hooks/shared/useFetch";
 
 const QuestionDetails = () => {
   const [quizStarted, setQuizStarted] = useState(false);
@@ -6,6 +7,18 @@ const QuestionDetails = () => {
   const [submitted, setSubmitted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(60);
 
+
+//   const { data, isLoading, isSuccess, refetch } = useFetchQuery(
+//     "/api/v1/questionPaper/getSingleQuestionPaper/QUE00"
+//   );
+// console.log("this is from eitty",data)
+
+//   if (isLoading) {
+//     return <p>Loading...</p>;
+//   }
+// console.log("single question",data)
+
+                                                                       
   const questions = [
     {
       id: 1,
