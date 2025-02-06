@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 import useFetchQuery from "../hooks/shared/useFetch";
 
 function AllQuestionPaperForExamineer() {
   const { data, isLoading, isSuccess, refetch } = useFetchQuery(
-    "/api/v1/questionPaper/allQuestionPapersOfExaminee"
+    "/api/v1/questionPaper/getAllQuestionPapersForExaminer"
   );
 
-  console.log("printed by munna", data);
-
+  // console.log("printed by munna", data.data);
+  // data.data.forEach(({ subject, duration, examineeId, id, totalMarks }) => {
+  //   console.log(`Subject: ${subject}, Duration: ${duration}, Examinee: ${examineeId}, ID: ${id}, Marks: ${totalMarks}`);
+  // });
+  
+  
+  
+   
   if (isLoading) {
     return <p>Loading...</p>;
   }
+  console.log(isSuccess)
   return (
     <div className="overflow-x-auto shadow-xl rounded-lg border border-gray-200">
-      {/* <table className="min-w-full text-sm text-left text-gray-500">
+       {/* <table className="min-w-full text-sm text-left text-gray-500">
         <thead className="bg-gray-50 text-xs text-gray-700 uppercase">
           <tr>
             <th className="px-6 py-3">Name</th>
@@ -40,7 +46,7 @@ function AllQuestionPaperForExamineer() {
             </tr>
           ))}
         </tbody>
-      </table> */}
+      </table>  */}
       <h1>Data fetched successfully</h1>
     </div>
   );
