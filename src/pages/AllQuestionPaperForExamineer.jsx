@@ -10,6 +10,10 @@ function AllQuestionPaperForExamineer() {
   // data.data.forEach(({ subject, duration, examineeId, id, totalMarks }) => {
   //   console.log(`Subject: ${subject}, Duration: ${duration}, Examinee: ${examineeId}, ID: ${id}, Marks: ${totalMarks}`);
   // });
+   //const results = data.data;
+   console.log(data)
+   const exams = data
+  
   
   
   
@@ -17,7 +21,7 @@ function AllQuestionPaperForExamineer() {
   if (isLoading) {
     return <p>Loading...</p>;
   }
-  console.log(isSuccess)
+  
   return (
     <div className="overflow-x-auto shadow-xl rounded-lg border border-gray-200">
        {/* <table className="min-w-full text-sm text-left text-gray-500">
