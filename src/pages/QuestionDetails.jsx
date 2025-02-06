@@ -70,7 +70,7 @@ console.log("fatch data by eitty",data);
           <h1 className="text-2xl font-bold text-center mb-6">{data.data.subject}</h1>
           <div className="mb-6 text-center">
             <p className="font-semibold">Total Marks: {data.data.totalMarks}</p>
-            <p className="font-semibold">Total Time: {timeLeft}s</p>
+            <p className="font-semibold">Total Time: {data.data.duration}s</p>
           </div>
           {!quizStarted ? (
             <div className="text-center">
@@ -83,6 +83,7 @@ console.log("fatch data by eitty",data);
             </div>
           ) : (
             <>
+            
               {!submitted ? (
                 <>
                   <div className="text-center text-red-600 font-bold mb-4">
@@ -116,7 +117,7 @@ console.log("fatch data by eitty",data);
                 </>
               ) : (
                 <div className="text-center">
-                  <h2 className="text-xl font-bold mb-4">Quiz Results</h2>
+                  <h2 className="text-xl font-bold mb-4 ">Quiz Results</h2>
                   <p className="text-lg mb-6">
                     You scored {calculateScore()} out of {questions.length}
                   </p>
