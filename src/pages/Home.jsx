@@ -1,10 +1,12 @@
 import CommonWrapper from "../components/CommonWrapper";
 import { Link, Button } from "@heroui/react";
+
 import { Card, CardContent, CardDescription, CardFooter, CardTitle } from "../components/ui/card";
 import { Pagination } from "@heroui/react";
 import useFetchQuery from "../hooks/shared/useFetch";
 
 const Home = () => {
+
   const { data, isLoading, isSuccess, refetch } = useFetchQuery(
     "/api/v1/questionPaper/getAllQuestionPapersForCandidate"
   );
@@ -44,7 +46,7 @@ console.log("this is from eitty",data)
           <Button
             showAnchorIcon
             as={Link}
-            color="success"
+          color="primary"
             href={`/question/${item.id}`} 
             variant="solid"
           >
@@ -58,7 +60,7 @@ console.log("this is from eitty",data)
   <p>No question papers available</p> 
 )}
       <CommonWrapper className="flex justify-center mt-6">
-        <Pagination initialPage={1} total={10} color="success" />
+        <Pagination initialPage={1} total={10} color="primary" />
       </CommonWrapper>
     </>
   );
