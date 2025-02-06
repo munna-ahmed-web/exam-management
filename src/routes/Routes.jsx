@@ -6,6 +6,9 @@ import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import QuestionDetails from "../pages/QuestionDetails";
 import AllQuestionPaperForExamineer from "../pages/AllQuestionPaperForExamineer";
+import SingleQuestionPaperForExamineer from "../pages/SingleQuestionPaperForExamineer";
+import AllQuestionPapersOfExaminee from "../pages/AllQuestionPapersOfExaminee";
+import SearchQuestionPaperbyExamineer from "../pages/SearchQuestionPaperbyExamineer";
 
 const routes = createBrowserRouter([
   {
@@ -38,6 +41,22 @@ const routes = createBrowserRouter([
         path: "/allQuestionPaperForExamineer",
         element: <AllQuestionPaperForExamineer />,
       },
+      {
+        index: true,
+        path: "/singleQuestionPaperForExamineer",
+        element: <SingleQuestionPaperForExamineer />,
+      },
+      {
+        index: true,
+        path: "/allQuestionPapersOfExaminee",
+        element: <AllQuestionPapersOfExaminee />,
+      },
+      {
+        index: true,
+        path: "/searchQuestionPaperbyExamineer",
+        element: <SearchQuestionPaperbyExamineer />,
+      },
+      
     ],
   },
 
