@@ -5,14 +5,18 @@ const QuestionDetails = () => {
   const [quizStarted, setQuizStarted] = useState(false);
   const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [timeLeft, setTimeLeft] = useState(60); 
 
   const { data, isLoading, isSuccess, isError, error } = useFetchQuery(
     "/api/v1/questionPaper/getSingleQuestionPaper/QUE00"
   );
+console.log("fatch data by eitty",data);
 
-  // Check the data structure in the console
-  console.log("Fetched data:", data);
+  useEffect(() => {
+    if (data?.data?.duration) {
+      setTimeLeft(data.data.duration); 
+    }
+  }, [data]); 
 
   useEffect(() => {
     if (quizStarted && timeLeft > 0 && !submitted) {
@@ -26,7 +30,6 @@ const QuestionDetails = () => {
 
   const handleStartQuiz = () => {
     setQuizStarted(true);
-    setTimeLeft(60);
   };
 
   const handleOptionChange = (questionId, option) => {
@@ -37,14 +40,13 @@ const QuestionDetails = () => {
     setSubmitted(true);
   };
 
-
   const calculateScore = () => {
     let score = 0;
+
     const questions = data?.data?.MCQSet || [];
 
-
     questions.forEach((q) => {
-      if (answers[q.mcqId] === q.correctAns) {
+      if (answers[q.mcqId] === q.options[q.correctAns - 1]) {
         score++;
       }
     });
@@ -59,24 +61,22 @@ const QuestionDetails = () => {
     return <p>Error: {error.message}</p>;
   }
 
- 
   const questions = data?.data?.MCQSet || [];
-
 
   return (
     <div>
       <div className="flex items-center justify-center p-4">
         <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-          <h1 className="text-2xl font-bold text-center mb-6">English Quiz</h1>
+          <h1 className="text-2xl font-bold text-center mb-6">{data.data.subject}</h1>
           <div className="mb-6 text-center">
-            <p className="font-semibold">Total Marks: {questions.length}</p>
+            <p className="font-semibold">Total Marks: {data.data.totalMarks}</p>
             <p className="font-semibold">Total Time: {timeLeft}s</p>
           </div>
           {!quizStarted ? (
             <div className="text-center">
               <button
                 onClick={handleStartQuiz}
-                className="bg-black text-white px-6 py-2 rounded-lg  transition duration-300"
+                className="bg-green-600 text-white px-6 py-2 rounded-lg transition duration-300"
               >
                 Start Quiz
               </button>
