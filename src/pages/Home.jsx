@@ -14,6 +14,7 @@ import DataNotFound from "../components/shared/DataNotFound";
 import LoadingSpinner from "../components/shared/LoadingSpinner";
 
 const Home = () => {
+
   const { data, isLoading, isSuccess, refetch } = useFetchQuery(
     "/api/v1/questionPaper/getAllQuestionPapersForCandidate"
   );
@@ -65,7 +66,7 @@ const Home = () => {
         <DataNotFound />
       )}
       <CommonWrapper className="flex justify-center mt-6">
-        <Pagination initialPage={1} total={10} color="success" />
+        <Pagination initialPage={1} total={10} color="primary" />
       </CommonWrapper>
     </>
   );
