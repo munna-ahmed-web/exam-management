@@ -4,6 +4,7 @@ function AllQuestionPapersOfExaminee(){
 
    const{data,isLoading,isSuccess,refetch} =useFetchQuery("/api/v1/questionPaper/allQuestionPapersOfExaminee")
    console.log("data is fetched",data)
+   console.log(data)
    if(isLoading){
     return("data fetching please wait")
    }

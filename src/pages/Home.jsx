@@ -1,6 +1,5 @@
 import CommonWrapper from "../components/CommonWrapper";
 import { Link, Button } from "@heroui/react";
-
 import {
   Card,
   CardContent,
@@ -12,16 +11,27 @@ import { Pagination } from "@heroui/react";
 import useFetchQuery from "../hooks/shared/useFetch";
 import DataNotFound from "../components/shared/DataNotFound";
 import LoadingSpinner from "../components/shared/LoadingSpinner";
+import { useState } from "react";
 
 const Home = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemPerpage, setItemPerpage] = useState(5);
+  const [totalCount, setTotalCount] = useState(63);
+
   const { data, isLoading, isSuccess, refetch } = useFetchQuery(
-    "/api/v1/questionPaper/getAllQuestionPapersForCandidate"
+    "/api/v1/questionPaper/getAllQuestionPapersForCandidate",
+    { page: currentPage, limit: itemPerpage }
   );
   console.log("this is from eitty", data);
 
   if (isLoading) {
     return <LoadingSpinner />;
   }
+
+  const getPage = (data) => {
+    console.log(data);
+    setCurrentPage(data);
+  };
   return (
     <>
       {isSuccess && data?.data?.length > 0 ? (
@@ -64,9 +74,17 @@ const Home = () => {
       ) : (
         <DataNotFound />
       )}
-      <CommonWrapper className="flex justify-center mt-6">
-        <Pagination initialPage={1} total={10} color="success" />
-      </CommonWrapper>
+      {data?.data?.length > 0 && (
+        <CommonWrapper className="flex justify-center mt-6">
+          <Pagination
+            page={currentPage}
+            total={Math.ceil(totalCount / itemPerpage)}
+            renderItem={itemPerpage}
+            onChange={getPage}
+            color="primary"
+          />
+        </CommonWrapper>
+      )}
     </>
   );
 };
