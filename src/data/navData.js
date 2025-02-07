@@ -53,8 +53,13 @@ export const navBarItemsList = [
     children: [
       {
         id: generateRandomID(),
+        label: "All Question Papers",
+        href: "/",
+      },
+       {
+        id: generateRandomID(),
         label: "Start Exam",
-        href: "/examStart",
+        href: "/question/:id",
       },
       {
         id: generateRandomID(),

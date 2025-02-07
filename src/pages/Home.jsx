@@ -7,22 +7,24 @@ import {
   CardFooter,
   CardTitle,
 } from "../components/ui/card";
-import { Pagination } from "@heroui/react";
+import { Pagination,Input } from "@heroui/react";
 import useFetchQuery from "../hooks/shared/useFetch";
 import DataNotFound from "../components/shared/DataNotFound";
 import LoadingSpinner from "../components/shared/LoadingSpinner";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemPerpage, setItemPerpage] = useState(5);
   const [totalCount, setTotalCount] = useState(63);
+  const [searchQuery, setSearchQuery]= useState('')
 
   const { data, isLoading, isSuccess, refetch } = useFetchQuery(
     "/api/v1/questionPaper/getAllQuestionPapersForCandidate",
-    { page: currentPage, limit: itemPerpage }
+    { page: currentPage, limit: itemPerpage , searchTerm: searchQuery,}, 
   );
   console.log("this is from eitty", data);
+
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -32,8 +34,41 @@ const Home = () => {
     console.log(data);
     setCurrentPage(data);
   };
+
+const handleSearchQuery = (e) =>{
+const value = e.target.value
+
+if (value){
+  setSearchQuery(value)
+} else{
+  setSearchQuery("")
+}
+}
+
+ console.log(searchQuery)
+
   return (
-    <>
+    <> 
+    <CommonWrapper>
+      
+      <Card className=" flex justify-center">
+      <div className="w-1/2 p-5">
+      <Input
+        isClearable
+        value={searchQuery}
+        onChange={ handleSearchQuery}
+  
+        placeholder="search Questions..."
+        radius="lg"
+      
+      />
+        </div>
+
+    
+      </Card>
+
+    
+    </CommonWrapper>
       {isSuccess && data?.data?.length > 0 ? (
         <CommonWrapper className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
           {data.data.map((item) => (
@@ -81,7 +116,7 @@ const Home = () => {
             total={Math.ceil(totalCount / itemPerpage)}
             renderItem={itemPerpage}
             onChange={getPage}
-            color="primary"
+            color="success"
           />
         </CommonWrapper>
       )}
