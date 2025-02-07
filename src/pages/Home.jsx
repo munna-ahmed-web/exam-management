@@ -1,5 +1,6 @@
 import CommonWrapper from "../components/CommonWrapper";
-import { Link, Button } from "@heroui/react";
+import { Button } from "@heroui/react";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -93,14 +94,8 @@ if (value){
               </CardContent>
 
               <CardFooter className="flex justify-center">
-                <Button
-                  showAnchorIcon
-                  as={Link}
-                  color="success"
-                  href={`/question/${item.id}`}
-                  variant="solid"
-                >
-                  See More
+                <Button showAnchorIcon color="success" variant="solid">
+                  <Link to={`/question/${item.id}`}>See More</Link>
                 </Button>
               </CardFooter>
             </Card>
