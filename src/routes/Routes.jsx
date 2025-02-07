@@ -9,6 +9,8 @@ import AllQuestionPaperForExamineer from "../pages/AllQuestionPaperForExamineer"
 import SingleQuestionPaperForExamineer from "../pages/SingleQuestionPaperForExamineer";
 import AllQuestionPapersOfExaminee from "../pages/AllQuestionPapersOfExaminee";
 import SearchQuestionPaperbyExamineer from "../pages/SearchQuestionPaperbyExamineer";
+import QuestionPaperListForExaminer from "../pages/QuestionPaperListForExaminer";
+import UserManagement from "../pages/Users";
 
 const routes = createBrowserRouter([
   {
@@ -29,6 +31,11 @@ const routes = createBrowserRouter([
         index: true,
         path: "/signup",
         element: <SignUp />,
+      },
+      {
+        index: true,
+        path: "/users",
+        element: <UserManagement />,
       },
       {
         index: true,
