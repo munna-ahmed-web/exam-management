@@ -9,9 +9,10 @@ import AllQuestionPaperForExamineer from "../pages/AllQuestionPaperForExamineer"
 import SingleQuestionPaperForExamineer from "../pages/SingleQuestionPaperForExamineer";
 import AllQuestionPapersOfExaminee from "../pages/AllQuestionPapersOfExaminee";
 import SearchQuestionPaperbyExamineer from "../pages/SearchQuestionPaperbyExamineer";
-import QuestionPaperListForExaminer from "../pages/QuestionPaperListForExaminer";
+
 import UserManagement from "../pages/Users";
 import CreateCandidate from "../pages/CreateCandidate";
+import CreateQuestionPaper from "../pages/CreateSingleQuestionPaper ";
 
 const routes = createBrowserRouter([
   {
@@ -68,6 +69,11 @@ const routes = createBrowserRouter([
         index: true,
         path: "/searchQuestionPaperbyExamineer",
         element: <SearchQuestionPaperbyExamineer />,
+      },
+      {
+        index: true,
+        path: "/createSingleQuestionPaper",
+        element: <CreateQuestionPaper />,
       },
       
     ],

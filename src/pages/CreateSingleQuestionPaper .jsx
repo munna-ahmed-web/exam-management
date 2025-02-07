@@ -48,7 +48,7 @@ function CreateQuestionPaper() {
 
   // Submit the form to create the question paper
   const handleSubmit = async (e) => {
-    console.log(subject,"subject")
+    console.log(totalMark,"totalMark")
     e.preventDefault();
     
     const data = {
@@ -60,7 +60,7 @@ function CreateQuestionPaper() {
     };
 
     const mutation = useMutation(
-        (newQuestionData) => axios.post('/api/v1/quiz/createQuestion', newQuestionData), // API endpoint to save the question
+        (newQuestionData) => axios.post('/api/v1/questionPaper/createQuestionPaper', newQuestionData), // API endpoint to save the question
         {
           onSuccess: (data) => {
             // Handle success (e.g., show a success message, clear the form)
@@ -113,7 +113,7 @@ function CreateQuestionPaper() {
           <input
             type="text"
             id="examineeId"
-            value={`EXA${examineeId}`}
+            value={`${examineeId}`}
             onChange={(e) => setExamineeId(e.target.value)}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             required
