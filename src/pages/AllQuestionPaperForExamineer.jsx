@@ -7,24 +7,11 @@ function AllQuestionPaperForExamineer() {
   const { data, isLoading, isSuccess, refetch } = useFetchQuery(
     "/api/v1/questionPaper/getAllQuestionPapersForExaminer"
   );
-
-  // console.log("printed by munna", data.data);
-  // data.data.forEach(({ subject, duration, examineeId, id, totalMarks }) => {
-  //   console.log(`Subject: ${subject}, Duration: ${duration}, Examinee: ${examineeId}, ID: ${id}, Marks: ${totalMarks}`);
-  // });
-   //const results = data.data;
-   console.log(data)
    const exams = data?.data || [];
-   console.log(exams)
-  
-  
-  
-  
-   
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
-  
   return (
     <div className="overflow-x-auto shadow-xl rounded-lg border border-gray-200">
        <table className="min-w-full text-sm text-left text-gray-500">

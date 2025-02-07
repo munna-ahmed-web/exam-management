@@ -63,11 +63,7 @@ const routes = createBrowserRouter([
         path: "/searchQuestionPaperbyExamineer",
         element: <SearchQuestionPaperbyExamineer />,
       },
-      {
-        index: true,
-        path: "/questionPapers",
-        element: <QuestionPaperListForExaminer />,
-      },
+      
     ],
   },
 

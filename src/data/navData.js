@@ -32,17 +32,17 @@ export const navBarItemsList = [
       {
         id: generateRandomID(),
         label: "Question Papers",
-        href: "/questionPapers",
+        href: "/allQuestionPaperForExamineer",
       },
       {
         id: generateRandomID(),
         label: "Create Question Paper",
-        href: "/createQuestionPaper",
+        href: "/createSingleQuestionPaper",
       },
       {
         id: generateRandomID(),
-        label: "Question Paper By Candidate",
-        href: "/questionPapersByCandidate/:id",
+        label: "Question Paper for Candidate",
+        href: "/allQuestionPapersOfExaminee",
       },
     ],
   },
