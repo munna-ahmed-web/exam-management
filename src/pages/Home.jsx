@@ -1,5 +1,5 @@
 import CommonWrapper from "../components/CommonWrapper";
-import { Button } from "@heroui/react";
+import { Button,Spinner } from "@heroui/react";
 import { Link } from "react-router-dom";
 import {
   Card,
@@ -27,9 +27,9 @@ const Home = () => {
   console.log("this is from eitty", data);
 
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+  // if (isLoading) {
+  //   return <Spinner color="success"/>;
+  // }
 
   const getPage = (data) => {
     console.log(data);
@@ -54,12 +54,14 @@ if (value){
       
       <Card className=" flex justify-center">
       <div className="w-1/2 p-5">
+    
+   
       <Input
         isClearable
         value={searchQuery}
         onChange={ handleSearchQuery}
   
-        placeholder="search Questions..."
+        placeholder="Search Questions..."
         radius="lg"
       
       />

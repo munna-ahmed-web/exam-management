@@ -65,6 +65,11 @@ export const navBarItemsList = [
         id: generateRandomID(),
         label: "Submit Exam",
         href: "/examSubmit",
+      }, 
+      {
+        id: generateRandomID(),
+        label: "Create Candidate",
+        href: "/createCandidate",
       },
     ],
   },
