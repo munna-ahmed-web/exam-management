@@ -24,16 +24,6 @@ const Home = () => {
     "/api/v1/questionPaper/getAllQuestionPapersForCandidate",
     { page: currentPage, limit: itemPerpage, searchTerm: searchQuery }
   );
-  console.log("this is from eitty", data);
-
-  // if (isLoading) {
-  //   return <Spinner color="success"/>;
-  // }
-
-  const getPage = (data) => {
-    console.log(data);
-    setCurrentPage(data);
-  };
 
   const handleSearchQuery = (e) => {
     const value = e.target.value;
@@ -45,14 +35,14 @@ const Home = () => {
     }
   };
 
-  console.log(searchQuery);
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <>
       <CommonWrapper>
-      {isSuccess && data?.data?.length > 0 && (
-          <Card className="flex justify-center">
-            <div className="w-1/2 p-5">
+        {data?.data?.length > 0 && (
+          <Card className=" flex justify-center">
+            <div className="w-1/2 p-2">
               <Input
                 isClearable
                 value={searchQuery}
@@ -104,7 +94,7 @@ const Home = () => {
             page={currentPage}
             total={Math.ceil(totalCount / itemPerpage)}
             renderItem={itemPerpage}
-            onChange={getPage}
+            onChange={setCurrentPage}
             color="success"
           />
         </CommonWrapper>

@@ -120,6 +120,7 @@ const AuthProvider = ({ children }) => {
 
   const customLogout = async () => {
     Cookies.remove("user");
+    Cookies.remove("userRole");
     setUser(null);
 
     return null;

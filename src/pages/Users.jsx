@@ -214,7 +214,7 @@ const UserManagement = () => {
               </Button>
             </Tooltip>
 
-            <Tooltip content="Edit user">
+            {/* <Tooltip content="Edit user">
               <Button
                 isIconOnly
                 variant="light"
@@ -223,7 +223,7 @@ const UserManagement = () => {
               >
                 <EditIcon />
               </Button>
-            </Tooltip>
+            </Tooltip> */}
 
             <Tooltip color="danger" content="Delete user">
               <Button

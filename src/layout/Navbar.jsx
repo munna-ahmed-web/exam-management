@@ -24,12 +24,13 @@ import toast from "react-hot-toast";
 import { navBarItemsList } from "../data/navData";
 import { ChevronRightIcon } from "lucide-react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
+import Cookies from "js-cookie";
 
 export default function Header() {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const { user, logout } = useContext(AuthContext);
+  const token = Cookies.get("user");
 
   return (
     <Navbar
@@ -238,7 +239,7 @@ export default function Header() {
       </NavbarMenu>
 
       <NavbarContent justify="end" className="flex gap-12">
-        {user ? (
+        {token ? (
           <UserPopover user={user} logout={logout} />
         ) : (
           <div>
