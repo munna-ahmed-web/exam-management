@@ -26,6 +26,7 @@ const SignIn = () => {
   const { user, setUser, googleSignIn } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
   const {
     control,
     handleSubmit,
@@ -46,6 +47,7 @@ const SignIn = () => {
     toast.success("Successfully Logged In", { position: "top-right" });
     // Cookies.set("user", res?.data?.data?.accessToken, { expires: 30 });
     Cookies.set("user", res?.data?.approvalToken, { expires: 30 });
+    Cookies.set("userRole", res?.data?.role, { expires: 30 });
     // setUser(res?.data?.data?.user);
     setUser(res?.data);
     setIsLoading(false);
@@ -115,7 +117,7 @@ const SignIn = () => {
             style={{ height: "500px", width: "500px" }}
           ></Player> */}
           <img
-            src="/src/assets/8609249_3966070.jpg"
+            src="/src/assets/login.jpg"
             alt=""
             style={{ height: "500px", width: "500px" }}
           />
@@ -221,8 +223,8 @@ const SignIn = () => {
                 <Button
                   disabled={isLoading}
                   isLoading={isLoading}
-                  color="primary"
-                  className="w-full  rounded-lg  font-bold   "
+                  color="success"
+                  className="w-full  rounded-lg  font-bold text-white "
                   type="submit"
                 >
                   Login

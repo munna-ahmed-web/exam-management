@@ -1,5 +1,5 @@
 import CommonWrapper from "../components/CommonWrapper";
-import { Button,Spinner } from "@heroui/react";
+import { Button, Spinner } from "@heroui/react";
 import { Link } from "react-router-dom";
 import {
   Card,
@@ -8,7 +8,7 @@ import {
   CardFooter,
   CardTitle,
 } from "../components/ui/card";
-import { Pagination,Input } from "@heroui/react";
+import { Pagination, Input } from "@heroui/react";
 import useFetchQuery from "../hooks/shared/useFetch";
 import DataNotFound from "../components/shared/DataNotFound";
 import LoadingSpinner from "../components/shared/LoadingSpinner";
@@ -18,60 +18,42 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemPerpage, setItemPerpage] = useState(5);
   const [totalCount, setTotalCount] = useState(63);
-  const [searchQuery, setSearchQuery]= useState('')
+  const [searchQuery, setSearchQuery] = useState("");
 
   const { data, isLoading, isSuccess, refetch } = useFetchQuery(
     "/api/v1/questionPaper/getAllQuestionPapersForCandidate",
-    { page: currentPage, limit: itemPerpage , searchTerm: searchQuery,}, 
+    { page: currentPage, limit: itemPerpage, searchTerm: searchQuery }
   );
-  console.log("this is from eitty", data);
 
+  const handleSearchQuery = (e) => {
+    const value = e.target.value;
 
-  // if (isLoading) {
-  //   return <Spinner color="success"/>;
-  // }
-
-  const getPage = (data) => {
-    console.log(data);
-    setCurrentPage(data);
+    if (value) {
+      setSearchQuery(value);
+    } else {
+      setSearchQuery("");
+    }
   };
 
-const handleSearchQuery = (e) =>{
-const value = e.target.value
-
-if (value){
-  setSearchQuery(value)
-} else{
-  setSearchQuery("")
-}
-}
-
- console.log(searchQuery)
+  if (isLoading) return <LoadingSpinner />;
 
   return (
-    <> 
-    <CommonWrapper>
-      
-      <Card className=" flex justify-center">
-      <div className="w-1/2 p-5">
-    
-   
-      <Input
-        isClearable
-        value={searchQuery}
-        onChange={ handleSearchQuery}
-  
-        placeholder="Search Questions..."
-        radius="lg"
-      
-      />
-        </div>
-
-    
-      </Card>
-
-    
-    </CommonWrapper>
+    <>
+      <CommonWrapper>
+        {data?.data?.length > 0 && (
+          <Card className=" flex justify-center">
+            <div className="w-1/2 p-2">
+              <Input
+                isClearable
+                value={searchQuery}
+                onChange={handleSearchQuery}
+                placeholder="Search Questions..."
+                radius="lg"
+              />
+            </div>
+          </Card>
+        )}
+      </CommonWrapper>
       {isSuccess && data?.data?.length > 0 ? (
         <CommonWrapper className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
           {data.data.map((item) => (
@@ -112,7 +94,7 @@ if (value){
             page={currentPage}
             total={Math.ceil(totalCount / itemPerpage)}
             renderItem={itemPerpage}
-            onChange={getPage}
+            onChange={setCurrentPage}
             color="success"
           />
         </CommonWrapper>

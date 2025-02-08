@@ -1,4 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
+import PrivateAdminRoute from "./PrivateAdminRoute";
+import PrivateExaminerRoute from "./PrivateExaminerRouter";
+
 import Home from "../pages/Home";
 import App from "../App";
 import NotFound from "../pages/NotFound";
@@ -13,6 +17,10 @@ import SearchQuestionPaperbyExamineer from "../pages/SearchQuestionPaperbyExamin
 import UserManagement from "../pages/Users";
 import CreateCandidate from "../pages/CreateCandidate";
 import CreateQuestionPaper from "../pages/CreateSingleQuestionPaper ";
+import UserDetails from "../pages/UserDetails";
+import UpdateUser from "../pages/UpdateUser";
+import OnlyForAdmin from "../components/shared/OnlyForAdmin";
+import OnlyForExaminer from "../components/shared/OnlyForExaminer";
 
 const routes = createBrowserRouter([
   {
@@ -22,7 +30,11 @@ const routes = createBrowserRouter([
       {
         index: true,
         path: "/",
-        element: <Home />,
+        element: (
+          <PrivateRoute>
+            <Home />
+          </PrivateRoute>
+        ),
       },
       {
         index: true,
@@ -36,15 +48,39 @@ const routes = createBrowserRouter([
       },
       {
         index: true,
+        path: "/onlyForAdmin",
+        element: <OnlyForAdmin />,
+      },
+      {
+        index: true,
+        path: "/onlyForExaminer",
+        element: <OnlyForExaminer />,
+      },
+      {
+        index: true,
         path: "/users",
-        element: <UserManagement />,
+        element: (
+          <PrivateAdminRoute>
+            <UserManagement />
+          </PrivateAdminRoute>
+        ),
+      },
+      {
+        index: true,
+        path: "/user/:id",
+        element: <UserDetails />,
+      },
+      {
+        index: true,
+        path: "/me/update",
+        element: <UpdateUser />,
       },
       {
         index: true,
         path: "/question/:id",
         element: <QuestionDetails />,
       },
-       {
+      {
         index: true,
         path: "/createCandidate",
         element: <CreateCandidate />,
@@ -75,7 +111,6 @@ const routes = createBrowserRouter([
         path: "/createSingleQuestionPaper",
         element: <CreateQuestionPaper />,
       },
-      
     ],
   },
 

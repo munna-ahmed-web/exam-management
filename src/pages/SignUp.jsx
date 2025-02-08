@@ -59,7 +59,7 @@ const SignUp = () => {
     Cookies.set("user", res?.data?.data?.accessToken, { expires: 30 });
     setUser(res?.data?.data?.user);
     toast.success("Successfully Created User");
-    navigate(path || "/dashboard");
+    navigate("/login");
 
     setIsLoading(false);
   };
@@ -69,18 +69,18 @@ const SignUp = () => {
     toast.error(err?.response?.data?.message || "Something went wrong");
     setIsLoading(false);
   };
-  const { mutate } = usePostMutate("/users/", onSuccess, onError);
+  const { mutate } = usePostMutate("/api/v1/user/createCandidate", onSuccess, onError);
 
   const onSubmit = async (userData) => {
-    setIsLoading(true);
-    if (!userData.avatar) {
-      setIsLoading(false);
+    // setIsLoading(true);
+    // if (!userData.avatar) {
+    //   setIsLoading(false);
 
-      return setError("avatar", {
-        type: "manual",
-        message: "Image is required.",
-      });
-    }
+    //   return setError("avatar", {
+    //     type: "manual",
+    //     message: "Image is required.",
+    //   });
+    // }
     console.log(userData);
     mutate(userData);
   };
@@ -132,7 +132,7 @@ const SignUp = () => {
             style={{ height: "500px", width: "500px" }}
           ></Player> */}
           <img
-            src="/src/assets/8609249_3966070.jpg"
+            src="/src/assets/signup.jpg"
             alt=""
             style={{ height: "500px", width: "500px" }}
           />
@@ -156,7 +156,7 @@ const SignUp = () => {
                 className="text-center flex flex-col gap-5 mt-8 "
               >
                 <div className="flex justify-center items-center gap-4">
-                  {avatarUrl ? (
+                  {/* {avatarUrl ? (
                     <ImageSelector handleFileChange={handleFileChange}>
                       <Avatar
                         isBordered
@@ -180,11 +180,11 @@ const SignUp = () => {
                         icon={<AvatarIcon />}
                       />
                     </ImageSelector>
-                  )}
+                  )} */}
 
                   <div className="w-full">
                     <Controller
-                      name="First Name"
+                      name="firstName"
                       control={control}
                       defaultValue=""
                       rules={{ required: "First Name is required" }}
@@ -207,7 +207,7 @@ const SignUp = () => {
                   </div>
                 </div>
                 <Controller
-                  name="Last Name"
+                  name="lastName"
                   control={control}
                   defaultValue=""
                   rules={{ required: "Last Name is required" }}
@@ -321,7 +321,7 @@ const SignUp = () => {
                   )}
                 />
 
-                <Controller
+                {/* <Controller
                   name="confirmPassword"
                   control={control}
                   defaultValue=""
@@ -366,12 +366,13 @@ const SignUp = () => {
                   <p className="text-left text-danger text-sm mt-2">
                     {errors.avatar.message}
                   </p>
-                )}
+                )} */}
 
                 <Button
+               
                   disabled={isLoading}
-                  color="primary"
-                  className="w-full  rounded-lg  font-bold   "
+                  color="success"
+                  className="w-full  rounded-lg  font-bold text-white  "
                   type="submit"
                 >
                   {isLoading ? (
@@ -380,7 +381,7 @@ const SignUp = () => {
                       Creating
                     </>
                   ) : (
-                    <>Create Account</>
+                    <>Create Candidate</>
                   )}
                 </Button>
               </form>
