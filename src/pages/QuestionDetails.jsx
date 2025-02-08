@@ -1,22 +1,24 @@
 import { useState, useEffect } from "react";
 import useFetchQuery from "../hooks/shared/useFetch";
+import { useParams } from "react-router-dom";
 
 const QuestionDetails = () => {
+  const { id } = useParams();
   const [quizStarted, setQuizStarted] = useState(false);
   const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(60); 
+  const [timeLeft, setTimeLeft] = useState(60);
 
   const { data, isLoading, isSuccess, isError, error } = useFetchQuery(
-    "/api/v1/questionPaper/getSingleQuestionPaper/QUE00"
+    `/api/v1/questionPaper/getSingleQuestionPaper/${id}`
   );
-console.log("fatch data by eitty",data);
+  console.log("fatch data by eitty", data);
 
   useEffect(() => {
     if (data?.data?.duration) {
-      setTimeLeft(data.data.duration); 
+      setTimeLeft(data.data.duration);
     }
-  }, [data]); 
+  }, [data]);
 
   useEffect(() => {
     if (quizStarted && timeLeft > 0 && !submitted) {
@@ -67,7 +69,9 @@ console.log("fatch data by eitty",data);
     <div>
       <div className="flex items-center justify-center p-4">
         <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-          <h1 className="text-2xl font-bold text-center mb-6">{data.data.subject}</h1>
+          <h1 className="text-2xl font-bold text-center mb-6">
+            {data.data.subject}
+          </h1>
           <div className="mb-6 text-center">
             <p className="font-semibold">Total Marks: {data.data.totalMarks}</p>
             <p className="font-semibold">Total Time: {data.data.duration}s</p>
@@ -83,7 +87,6 @@ console.log("fatch data by eitty",data);
             </div>
           ) : (
             <>
-            
               {!submitted ? (
                 <>
                   <div className="text-center text-red-600 font-bold mb-4">
@@ -94,12 +97,17 @@ console.log("fatch data by eitty",data);
                       <p className="font-semibold mb-2">{q.question}</p>
                       <div className="space-y-2">
                         {q.options.map((option, index) => (
-                          <label key={index} className="flex items-center space-x-2">
+                          <label
+                            key={index}
+                            className="flex items-center space-x-2"
+                          >
                             <input
                               type="radio"
                               name={`question-${q.mcqId}`}
                               value={option}
-                              onChange={() => handleOptionChange(q.mcqId, option)}
+                              onChange={() =>
+                                handleOptionChange(q.mcqId, option)
+                              }
                               className="h-4 w-4 rounded-full border-2 border-gray-500 checked:bg-green-600 checked:border-green-600 focus:ring-green-600"
                             />
                             <span>{option}</span>
@@ -139,7 +147,9 @@ console.log("fatch data by eitty",data);
                         </p>
                         <p className="text-sm">
                           Correct answer:{" "}
-                          <span className="text-green-600">{q.options[q.correctAns - 1]}</span>
+                          <span className="text-green-600">
+                            {q.options[q.correctAns - 1]}
+                          </span>
                         </p>
                       </div>
                     ))}

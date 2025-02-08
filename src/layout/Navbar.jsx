@@ -12,7 +12,7 @@ import {
   DropdownItem,
 } from "@heroui/react";
 
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../hooks/AuthContextProvider";
 import { motion } from "framer-motion";
@@ -26,6 +26,7 @@ import { ChevronRightIcon } from "lucide-react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 
 export default function Header() {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { user, logout } = useContext(AuthContext);
@@ -129,8 +130,12 @@ export default function Header() {
                     >
                       {item.children.map((child) => {
                         return (
-                          <DropdownItem key={child.id}>
-                            <Link to={child.href}>{child.label}</Link>
+                          <DropdownItem
+                            key={child.id}
+                            as="button"
+                            onPress={() => navigate(child.href)}
+                          >
+                            {child.label}
                           </DropdownItem>
                         );
                       })}
@@ -209,15 +214,19 @@ export default function Header() {
                   </DropdownTrigger>
                 </NavbarItem>
                 <DropdownMenu
-                  className="w-[340px]"
+                  // className="w-[340px]"
                   itemClasses={{
                     base: "gap-4",
                   }}
                 >
                   {item.children.map((child) => {
                     return (
-                      <DropdownItem key={child.id}>
-                        <Link to={child.href}>{child.label}</Link>
+                      <DropdownItem
+                        key={child.id}
+                        as="button"
+                        onPress={() => navigate(child.href)}
+                      >
+                        {child.label}
                       </DropdownItem>
                     );
                   })}

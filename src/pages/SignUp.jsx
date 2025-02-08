@@ -72,17 +72,17 @@ const SignUp = () => {
   const { mutate } = usePostMutate("/users/", onSuccess, onError);
 
   const onSubmit = async (userData) => {
-    setIsLoading(true);
-    if (!userData.avatar) {
-      setIsLoading(false);
+    // setIsLoading(true);
+    // if (!userData.avatar) {
+    //   setIsLoading(false);
 
-      return setError("avatar", {
-        type: "manual",
-        message: "Image is required.",
-      });
-    }
+    //   return setError("avatar", {
+    //     type: "manual",
+    //     message: "Image is required.",
+    //   });
+    // }
     console.log(userData);
-    mutate(userData);
+    // mutate(userData);
   };
 
   const toggleVisibility = () => setIsVisible(!isVisible);
@@ -156,7 +156,7 @@ const SignUp = () => {
                 className="text-center flex flex-col gap-5 mt-8 "
               >
                 <div className="flex justify-center items-center gap-4">
-                  {avatarUrl ? (
+                  {/* {avatarUrl ? (
                     <ImageSelector handleFileChange={handleFileChange}>
                       <Avatar
                         isBordered
@@ -180,11 +180,11 @@ const SignUp = () => {
                         icon={<AvatarIcon />}
                       />
                     </ImageSelector>
-                  )}
+                  )} */}
 
                   <div className="w-full">
                     <Controller
-                      name="First Name"
+                      name="firstName"
                       control={control}
                       defaultValue=""
                       rules={{ required: "First Name is required" }}
@@ -207,7 +207,7 @@ const SignUp = () => {
                   </div>
                 </div>
                 <Controller
-                  name="Last Name"
+                  name="lastName"
                   control={control}
                   defaultValue=""
                   rules={{ required: "Last Name is required" }}
@@ -321,7 +321,7 @@ const SignUp = () => {
                   )}
                 />
 
-                <Controller
+                {/* <Controller
                   name="confirmPassword"
                   control={control}
                   defaultValue=""
@@ -366,7 +366,7 @@ const SignUp = () => {
                   <p className="text-left text-danger text-sm mt-2">
                     {errors.avatar.message}
                   </p>
-                )}
+                )} */}
 
                 <Button
                   disabled={isLoading}
