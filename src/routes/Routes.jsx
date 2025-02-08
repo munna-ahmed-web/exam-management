@@ -59,7 +59,7 @@ const routes = createBrowserRouter([
       {
         index: true,
         path: "/createCandidate",
-        element: <CreateCandidate />,
+        element: <SignUp/>,
       },
 
       {

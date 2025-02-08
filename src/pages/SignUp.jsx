@@ -59,7 +59,7 @@ const SignUp = () => {
     Cookies.set("user", res?.data?.data?.accessToken, { expires: 30 });
     setUser(res?.data?.data?.user);
     toast.success("Successfully Created User");
-    navigate(path || "/dashboard");
+    navigate("/login");
 
     setIsLoading(false);
   };
@@ -69,7 +69,7 @@ const SignUp = () => {
     toast.error(err?.response?.data?.message || "Something went wrong");
     setIsLoading(false);
   };
-  const { mutate } = usePostMutate("/users/", onSuccess, onError);
+  const { mutate } = usePostMutate("/api/v1/user/createCandidate", onSuccess, onError);
 
   const onSubmit = async (userData) => {
     // setIsLoading(true);
@@ -82,7 +82,7 @@ const SignUp = () => {
     //   });
     // }
     console.log(userData);
-    // mutate(userData);
+    mutate(userData);
   };
 
   const toggleVisibility = () => setIsVisible(!isVisible);
@@ -132,7 +132,7 @@ const SignUp = () => {
             style={{ height: "500px", width: "500px" }}
           ></Player> */}
           <img
-            src="/src/assets/8609249_3966070.jpg"
+            src="/src/assets/signup.jpg"
             alt=""
             style={{ height: "500px", width: "500px" }}
           />
@@ -369,9 +369,10 @@ const SignUp = () => {
                 )} */}
 
                 <Button
+               
                   disabled={isLoading}
-                  color="primary"
-                  className="w-full  rounded-lg  font-bold   "
+                  color="success"
+                  className="w-full  rounded-lg  font-bold text-white  "
                   type="submit"
                 >
                   {isLoading ? (
@@ -380,7 +381,7 @@ const SignUp = () => {
                       Creating
                     </>
                   ) : (
-                    <>Create Account</>
+                    <>Create Candidate</>
                   )}
                 </Button>
               </form>

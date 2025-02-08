@@ -50,17 +50,19 @@ const Home = () => {
   return (
     <>
       <CommonWrapper>
-        <Card className=" flex justify-center">
-          <div className="w-1/2 p-5">
-            <Input
-              isClearable
-              value={searchQuery}
-              onChange={handleSearchQuery}
-              placeholder="Search Questions..."
-              radius="lg"
-            />
-          </div>
-        </Card>
+      {isSuccess && data?.data?.length > 0 && (
+          <Card className="flex justify-center">
+            <div className="w-1/2 p-5">
+              <Input
+                isClearable
+                value={searchQuery}
+                onChange={handleSearchQuery}
+                placeholder="Search Questions..."
+                radius="lg"
+              />
+            </div>
+          </Card>
+        )}
       </CommonWrapper>
       {isSuccess && data?.data?.length > 0 ? (
         <CommonWrapper className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
