@@ -13,6 +13,8 @@ import SearchQuestionPaperbyExamineer from "../pages/SearchQuestionPaperbyExamin
 import UserManagement from "../pages/Users";
 import CreateCandidate from "../pages/CreateCandidate";
 import CreateQuestionPaper from "../pages/CreateSingleQuestionPaper ";
+import UserDetails from "../pages/UserDetails";
+import UpdateUser from "../pages/UpdateUser";
 
 const routes = createBrowserRouter([
   {
@@ -41,10 +43,20 @@ const routes = createBrowserRouter([
       },
       {
         index: true,
+        path: "/user/:id",
+        element: <UserDetails />,
+      },
+      {
+        index: true,
+        path: "/user/:id/update",
+        element: <UpdateUser />,
+      },
+      {
+        index: true,
         path: "/question/:id",
         element: <QuestionDetails />,
       },
-       {
+      {
         index: true,
         path: "/createCandidate",
         element: <CreateCandidate />,
@@ -75,7 +87,6 @@ const routes = createBrowserRouter([
         path: "/createSingleQuestionPaper",
         element: <CreateQuestionPaper />,
       },
-      
     ],
   },
 
