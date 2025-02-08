@@ -115,7 +115,7 @@ const SignIn = () => {
             style={{ height: "500px", width: "500px" }}
           ></Player> */}
           <img
-            src="/src/assets/8609249_3966070.jpg"
+            src="/src/assets/login.jpg"
             alt=""
             style={{ height: "500px", width: "500px" }}
           />
