@@ -221,8 +221,8 @@ const SignIn = () => {
                 <Button
                   disabled={isLoading}
                   isLoading={isLoading}
-                  color="primary"
-                  className="w-full  rounded-lg  font-bold   "
+                  color="success"
+                  className="w-full  rounded-lg  font-bold text-white "
                   type="submit"
                 >
                   Login

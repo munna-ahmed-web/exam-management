@@ -16,6 +16,7 @@ import useFetchQuery from "../hooks/shared/useFetch";
 import LoadingSpinner from "../components/shared/LoadingSpinner";
 import useDeleteMutate from "../hooks/shared/useDeleteMutate";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export const columns = [
   { name: "NAME", uid: "name" },
@@ -154,6 +155,7 @@ const statusColorMap = {
 //main component from here *********************************************
 
 const UserManagement = () => {
+  const navigate = useNavigate();
   const { data, isLoading, isSuccess, refetch } = useFetchQuery(
     "/api/v1/user/getAllUser"
   );
@@ -205,7 +207,7 @@ const UserManagement = () => {
               <Button
                 isIconOnly
                 variant="light"
-                onPress={() => console.log("Clicked!", user._id)}
+                onPress={() => navigate(`/user/${user.id}`)}
                 className="text-lg text-default-400 cursor-pointer active:opacity-50"
               >
                 <EyeIcon />
@@ -216,7 +218,7 @@ const UserManagement = () => {
               <Button
                 isIconOnly
                 variant="light"
-                onPress={() => console.log("Clicked!", user._id)}
+                onPress={() => navigate(`/user/${user.id}/update`)}
                 className="text-lg text-default-400 cursor-pointer active:opacity-50"
               >
                 <EditIcon />
@@ -227,7 +229,7 @@ const UserManagement = () => {
               <Button
                 isIconOnly
                 variant="light"
-                onPress={() => mutate(user._id)}
+                onPress={() => mutate(user.id)}
                 className="text-lg text-danger cursor-pointer active:opacity-50"
               >
                 <DeleteIcon />
