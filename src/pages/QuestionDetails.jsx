@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import useFetchQuery from "../hooks/shared/useFetch";
 import { useParams } from "react-router-dom";
+import LoadingSpinner from "../components/shared/LoadingSpinner";
 
 const QuestionDetails = () => {
   const { id } = useParams();
@@ -56,7 +57,7 @@ const QuestionDetails = () => {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner></LoadingSpinner>;
   }
 
   if (isError) {
