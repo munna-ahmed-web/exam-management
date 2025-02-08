@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import useFetchQuery from "../hooks/shared/useFetch";
 import { useParams } from "react-router-dom";
+import LoadingSpinner from "../components/shared/LoadingSpinner";
 
 const QuestionDetails = () => {
   const { id } = useParams();
@@ -8,6 +9,7 @@ const QuestionDetails = () => {
   const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(60);
+  const [timeUp, setTimeUp] = useState(false);
 
   const { data, isLoading, isSuccess, isError, error } = useFetchQuery(
     `/api/v1/questionPaper/getSingleQuestionPaper/${id}`
@@ -26,7 +28,8 @@ const QuestionDetails = () => {
       return () => clearTimeout(timer);
     }
     if (timeLeft === 0) {
-      setSubmitted(true);
+      setTimeUp(true);
+      setSubmitted(true); 
     }
   }, [quizStarted, timeLeft, submitted]);
 
@@ -44,9 +47,7 @@ const QuestionDetails = () => {
 
   const calculateScore = () => {
     let score = 0;
-
     const questions = data?.data?.MCQSet || [];
-
     questions.forEach((q) => {
       if (answers[q.mcqId] === q.options[q.correctAns - 1]) {
         score++;
@@ -56,7 +57,7 @@ const QuestionDetails = () => {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner></LoadingSpinner>;
   }
 
   if (isError) {
@@ -92,6 +93,11 @@ const QuestionDetails = () => {
                   <div className="text-center text-red-600 font-bold mb-4">
                     Time Left: {timeLeft} seconds
                   </div>
+                  {timeUp && (
+                    <div className="text-center text-red-600 font-bold mb-4">
+                      Your time is up!
+                    </div>
+                  )}
                   {questions.map((q) => (
                     <div key={q.mcqId} className="mb-6">
                       <p className="font-semibold mb-2">{q.question}</p>
@@ -109,6 +115,7 @@ const QuestionDetails = () => {
                                 handleOptionChange(q.mcqId, option)
                               }
                               className="h-4 w-4 rounded-full border-2 border-gray-500 checked:bg-green-600 checked:border-green-600 focus:ring-green-600"
+                              disabled={timeUp} 
                             />
                             <span>{option}</span>
                           </label>
@@ -126,9 +133,13 @@ const QuestionDetails = () => {
               ) : (
                 <div className="text-center">
                   <h2 className="text-xl font-bold mb-4 ">Quiz Results</h2>
-                  <p className="text-lg mb-6">
-                    You scored {calculateScore()} out of {questions.length}
-                  </p>
+                  {timeUp ? (
+                    <p className="text-lg text-red-600 mb-6">Your time is up!</p> 
+                  ) : (
+                    <p className="text-lg mb-6">
+                      You scored {calculateScore()} out of {questions.length}
+                    </p>
+                  )}
                   <div className="text-left">
                     {questions.map((q) => (
                       <div key={q.mcqId} className="mb-4">

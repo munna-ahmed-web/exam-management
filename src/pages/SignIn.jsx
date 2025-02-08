@@ -117,7 +117,7 @@ const SignIn = () => {
             style={{ height: "500px", width: "500px" }}
           ></Player> */}
           <img
-            src="/src/assets/8609249_3966070.jpg"
+            src="/src/assets/login.jpg"
             alt=""
             style={{ height: "500px", width: "500px" }}
           />
@@ -223,8 +223,8 @@ const SignIn = () => {
                 <Button
                   disabled={isLoading}
                   isLoading={isLoading}
-                  color="primary"
-                  className="w-full  rounded-lg  font-bold   "
+                  color="success"
+                  className="w-full  rounded-lg  font-bold text-white "
                   type="submit"
                 >
                   Login
