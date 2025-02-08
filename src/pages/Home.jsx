@@ -24,16 +24,6 @@ const Home = () => {
     "/api/v1/questionPaper/getAllQuestionPapersForCandidate",
     { page: currentPage, limit: itemPerpage, searchTerm: searchQuery }
   );
-  console.log("this is from eitty", data);
-
-  // if (isLoading) {
-  //   return <Spinner color="success"/>;
-  // }
-
-  const getPage = (data) => {
-    console.log(data);
-    setCurrentPage(data);
-  };
 
   const handleSearchQuery = (e) => {
     const value = e.target.value;
@@ -45,22 +35,24 @@ const Home = () => {
     }
   };
 
-  console.log(searchQuery);
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <>
       <CommonWrapper>
-        <Card className=" flex justify-center">
-          <div className="w-1/2 p-5">
-            <Input
-              isClearable
-              value={searchQuery}
-              onChange={handleSearchQuery}
-              placeholder="Search Questions..."
-              radius="lg"
-            />
-          </div>
-        </Card>
+        {data?.data?.length > 0 && (
+          <Card className=" flex justify-center">
+            <div className="w-1/2 p-2">
+              <Input
+                isClearable
+                value={searchQuery}
+                onChange={handleSearchQuery}
+                placeholder="Search Questions..."
+                radius="lg"
+              />
+            </div>
+          </Card>
+        )}
       </CommonWrapper>
       {isSuccess && data?.data?.length > 0 ? (
         <CommonWrapper className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
@@ -102,7 +94,7 @@ const Home = () => {
             page={currentPage}
             total={Math.ceil(totalCount / itemPerpage)}
             renderItem={itemPerpage}
-            onChange={getPage}
+            onChange={setCurrentPage}
             color="success"
           />
         </CommonWrapper>

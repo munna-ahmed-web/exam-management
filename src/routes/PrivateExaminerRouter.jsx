@@ -3,9 +3,8 @@ import { AuthContext } from "@/hooks/AuthContextProvider";
 import LoaderScreen from "@/others/LoadingScreen";
 import { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import Cookies from "js-cookie";
 
-export default function PrivateAdminRoute({ children }) {
+export default function PrivateExaminerRoute({ children }) {
   const token = Cookies.get("user");
   const role = Cookies.get("userRole");
 
@@ -20,10 +19,10 @@ export default function PrivateAdminRoute({ children }) {
     return <Navigate to={"/login"} replace={true} state={{ path: pathname }} />;
   }
 
-  if (role != "admin") {
+  if (role != "examinee") {
     return (
       <Navigate
-        to={"/onlyForAdmin"}
+        to={"/onlyForExaminer"}
         replace={true}
         state={{ path: pathname }}
       />

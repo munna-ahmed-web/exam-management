@@ -26,6 +26,7 @@ const SignIn = () => {
   const { user, setUser, googleSignIn } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
   const {
     control,
     handleSubmit,
@@ -46,6 +47,7 @@ const SignIn = () => {
     toast.success("Successfully Logged In", { position: "top-right" });
     // Cookies.set("user", res?.data?.data?.accessToken, { expires: 30 });
     Cookies.set("user", res?.data?.approvalToken, { expires: 30 });
+    Cookies.set("userRole", res?.data?.role, { expires: 30 });
     // setUser(res?.data?.data?.user);
     setUser(res?.data);
     setIsLoading(false);
