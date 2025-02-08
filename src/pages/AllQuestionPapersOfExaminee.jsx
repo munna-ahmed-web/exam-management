@@ -18,6 +18,7 @@ function AllQuestionPaperForExamineer() {
 
   // Ensure data exists before mapping
   const exams = data?.data ? [data.data] : [];
+  console.log(exams)
 
   return (
     <div className="overflow-x-auto shadow-xl rounded-lg border border-gray-200">
@@ -27,7 +28,7 @@ function AllQuestionPaperForExamineer() {
       {exams.map((exam) => (
         <div key={exam.id} className="p-4 text">
           <div className="font-semibold text-lg text-center">{exam.subject}</div>
-          <div className="text-sm mb-4 text-center">Duration: {exam.duration} minutes</div>
+          <div className="text-sm mb-4">Duration: {exam.duration} minutes</div>
           
           {/* Iterate over MCQSet to display each question */}
           {exam.MCQSet.map((mcq) => (
