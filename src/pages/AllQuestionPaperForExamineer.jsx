@@ -3,6 +3,7 @@ import useFetchQuery from "../hooks/shared/useFetch";
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 import AllQuestionPapersOfExaminee from "./AllQuestionPapersOfExaminee";
 import useUpdateMutateWithID from "../hooks/shared/useUpdateMutateWithID";
+import useDeleteMutate from "../hooks/shared/useDeleteMutate";
 
 function AllQuestionPaperForExamineer() {
   const [exams,setExams] = useState([])
@@ -18,11 +19,14 @@ function AllQuestionPaperForExamineer() {
     "/api/v1/questionPaper/getAllQuestionPapersForExaminer"
   );
   console.log(data)
+  const onSuccess = () =>{
+    console.log("succesfully deleted the question")
+  }
+  const onError = () =>{
+    console.log("There is an error in ")
+  }
 
-  const {mutate,isPending} = useUpdateMutateWithID(
-    ''
-  );
-
+  // const {} = useDeleteMutate('/api/v1/questionPaper/removeMCQ?qid=QUE00&mcqId=QUE00MCQ4',onSuccess)
 
 
   useEffect(() => {
