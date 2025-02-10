@@ -12,6 +12,7 @@ const QuestionDetailsForExamineer = () => {
     const user = data?.data?.MCQSet || {};
     console.log("ramjan2222",data?.data?.MCQSet)
     console.log("ramjan",data)
+    console.log(user)
     if (isLoading) return <LoadingSpinner />
 
 
@@ -29,8 +30,22 @@ const QuestionDetailsForExamineer = () => {
                     {/* Question Text */}
                     {data?.data?.MCQSet.map((item, index) => (
                         <div key={index} className="text-gray-700">
-                            <strong>Question:</strong> {item.question}
-                            <span>{item?.options.map(option=><p>{option}</p>)}</span>
+                            <strong>{index+1}.Question:</strong> {item.question}
+                            <ul>{item?.options.map((option,index)=><li>
+                                {index+1}.{option}
+                                
+                            </li>)}</ul>
+                            <div className="mt-4">
+                        <p className="text-green-600 font-semibold">
+                            <strong>Correct Answer:</strong> {item.correctAns}
+                        </p>
+                    </div>
+                    <div className="mt-4">
+                        <p className="text-gray-700">
+                            <strong>Marks:</strong> {item.mark}
+                        </p>
+                    </div>
+                            
                         </div>
                     ))}
 
@@ -38,33 +53,7 @@ const QuestionDetailsForExamineer = () => {
 
 
 
-                    {/* Options */}
-                    <div>
-                        <p className="text-gray-700 font-semibold">Options:</p>
-                        <ul className="space-y-2">
-                            {user.options?.map((option, index) => (
-                                <li key={index} className="p-2 border rounded-md bg-gray-100">
-                                    {index + 1}. {option}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Correct Answer */}
-                    <div className="mt-4">
-                        <p className="text-green-600 font-semibold">
-                            <strong>Correct Answer:</strong> {user.correctAns}
-                        </p>
-                    </div>
-
-                    {/* Marks */}
-                    <div className="mt-4">
-                        <p className="text-gray-700">
-                            <strong>Marks:</strong> {user.mark}
-                        </p>
-                    </div>
-
-                    {/* Identifiers */}
+                    
                     
                 </CardBody>
             </Card>
