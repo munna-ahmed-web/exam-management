@@ -22,6 +22,7 @@ import UpdateUser from "../pages/UpdateUser";
 import OnlyForAdmin from "../components/shared/OnlyForAdmin";
 import OnlyForExaminer from "../components/shared/OnlyForExaminer";
 import CreateExaminer from "../pages/CreateExaminer";
+import QuestionDetailsForExamineer from "../pages/QuestionDetailsForExamineer";
 
 const routes = createBrowserRouter([
   {
@@ -120,6 +121,11 @@ const routes = createBrowserRouter([
         index: true,
         path: "/createSingleQuestionPaper",
         element: <CreateQuestionPaper />,
+      },
+      {
+        index: true,
+        path: "/questionDetails/:id",
+        element: <QuestionDetailsForExamineer />,
       },
     ],
   },

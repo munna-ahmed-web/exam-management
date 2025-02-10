@@ -3,6 +3,10 @@ import useFetchQuery from "../hooks/shared/useFetch";
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 import AllQuestionPapersOfExaminee from "./AllQuestionPapersOfExaminee";
 import useUpdateMutateWithID from "../hooks/shared/useUpdateMutateWithID";
+import useDeleteMutate from "../hooks/shared/useDeleteMutate";
+import { Button, Tooltip } from "@heroui/react";
+import { EyeIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function AllQuestionPaperForExamineer() {
   const [exams,setExams] = useState([])
@@ -18,12 +22,15 @@ function AllQuestionPaperForExamineer() {
     "/api/v1/questionPaper/getAllQuestionPapersForExaminer"
   );
   console.log(data)
+  const onSuccess = () =>{
+    console.log("succesfully deleted the question")
+  }
+  const onError = () =>{
+    console.log("There is an error in ")
+  }
 
-  const {mutate,isPending} = useUpdateMutateWithID(
-    ''
-  );
-
-
+  // const {} = useDeleteMutate('/api/v1/questionPaper/removeMCQ?qid=QUE00&mcqId=QUE00MCQ4',onSuccess)
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (data?.data) {
@@ -169,7 +176,7 @@ function AllQuestionPaperForExamineer() {
                 )}
               </td>
               <td className="px-6 py-4 text-center">
-                {exam.isEditing ? (
+                {/* {exam.isEditing ? (
                   <button
                     onClick={() => handleClick("SAVE", exam.id)}
                     className="text-green-500 hover:text-green-700 mx-2"
@@ -189,7 +196,18 @@ function AllQuestionPaperForExamineer() {
                   className="text-red-500 hover:text-red-700 mx-2"
                 >
                   <TrashIcon className="h-5 w-5" />
-                </button>
+                </button> */}
+                <Tooltip content="Details">
+              <Button
+                isIconOnly
+                variant="light"
+                //onPress={() => navigate(`/user/${user.id}`)}
+                onPress={()=> navigate(`/questionDetails/${exam.id}`)}
+                className="text-lg text-default-400 cursor-pointer active:opacity-50"
+              >
+                <EyeIcon />
+              </Button>
+            </Tooltip>
               </td>
             </tr>
           ))}

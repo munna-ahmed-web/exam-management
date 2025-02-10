@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useMutation } from "@tanstack/react-query";
+import usePostMutate from "../hooks/shared/usePostMutate";
 
 function CreateQuestionPaper() {
   const [subject, setSubject] = useState("");
@@ -19,10 +19,15 @@ function CreateQuestionPaper() {
   // Handle input changes
   const handleChange = (e, index, field) => {
     const updatedQuestions = [...questions];
-    if (field === "options") {
+    if (field === "correctAns") {
+      updatedQuestions[index][field] = parseInt(e.target.value, 10);  // Make sure it's a number
+    }
+    else if (field === "options") {
       updatedQuestions[index][field][e.target.name] = e.target.value;
-    } else {
-      updatedQuestions[index][field] = e.target.value;
+    } 
+    
+    else {
+      updatedQuestions[index][field] =(e.target.value);
     }
     setQuestions(updatedQuestions);
   };
@@ -46,32 +51,30 @@ function CreateQuestionPaper() {
     setQuestions(updatedQuestions);
   };
 
-  // Submit the form to create the question paper
-  const handleSubmit = async (e) => {
-    console.log(totalMark,"totalMark")
-    e.preventDefault();
-    
-    const data = {
-      subject,
-      duration: parseInt(duration),
-      examineeId,
-      totalMarks: parseInt(totalMarks),
-      MCQSet: questions,
-    };
+ 
+  
 
-    const mutation = useMutation(
-        (newQuestionData) => axios.post('/api/v1/questionPaper/createQuestionPaper', newQuestionData), // API endpoint to save the question
-        {
-          onSuccess: (data) => {
-            // Handle success (e.g., show a success message, clear the form)
-            console.log('Quiz Question Created:', data);
-          },
-          onError: (error) => {
-            // Handle error (e.g., show error message)
-            console.error('Error creating quiz question:', error);
-          },
-        }
-      );
+  const onSuccess = () =>{
+    console.log("request success")
+  }
+  const onError = () =>{
+
+  }
+    const {mutate,isPending} = usePostMutate('/api/v1/questionPaper/createQuestionPaper',onSuccess,onError)
+    
+    const handleSubmit = async (e) => {
+      // console.log(totalMark,"totalMark")
+      e.preventDefault();
+      
+      const data = {
+        subject,
+        duration: parseInt(duration),
+        examineeId,
+        totalMarks: parseInt(totalMarks),
+        MCQSet: questions,
+      };
+      mutate(data)
+      console.log(data)
     }
 
   return (
@@ -180,6 +183,7 @@ function CreateQuestionPaper() {
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                   min="1"
                   max="4"
+                  step="1"
                   required
                 />
               </div>
