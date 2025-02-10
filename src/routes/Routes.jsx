@@ -21,6 +21,7 @@ import UserDetails from "../pages/UserDetails";
 import UpdateUser from "../pages/UpdateUser";
 import OnlyForAdmin from "../components/shared/OnlyForAdmin";
 import OnlyForExaminer from "../components/shared/OnlyForExaminer";
+import CreateExaminer from "../pages/CreateExaminer";
 
 const routes = createBrowserRouter([
   {
@@ -31,9 +32,9 @@ const routes = createBrowserRouter([
         index: true,
         path: "/",
         element: (
-          <PrivateRoute>
-            <Home />
-          </PrivateRoute>
+          // <PrivateRoute>
+          <Home />
+          // </PrivateRoute>
         ),
       },
       {
@@ -84,6 +85,15 @@ const routes = createBrowserRouter([
         index: true,
         path: "/createCandidate",
         element: <CreateCandidate />,
+      },
+      {
+        index: true,
+        path: "/createExaminer",
+        element: (
+          <PrivateAdminRoute>
+            <CreateExaminer />
+          </PrivateAdminRoute>
+        ),
       },
 
       {
