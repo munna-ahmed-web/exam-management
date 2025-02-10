@@ -123,6 +123,8 @@ const AuthProvider = ({ children }) => {
     Cookies.remove("userRole");
     setUser(null);
 
+    window.location.reload(); //refreshing page
+
     return null;
   };
   const logout = () => {
