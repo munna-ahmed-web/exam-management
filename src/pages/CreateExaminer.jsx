@@ -7,19 +7,22 @@ const CreateExaminer = () => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
 
+  const onSuccess = (data) => {
+    toast.success("Examiner created successfully!", {
+      position: "top-right",
+    });
+    navigate("/users");
+  };
+
+  const onError = (error) => {
+    console.log(error);
+    toast.error("Error creating Examiner.", { position: "top-right" });
+  };
+
   const { mutate, isPending } = usePostMutate(
     "/api/v1/user/createExaminee",
-    (data) => {
-      console.log("Candidate created successfully:", data);
-      toast.success("Examiner created successfully!", {
-        position: "top-right",
-      });
-      navigate("/users");
-    },
-    (error) => {
-      console.log("Error creating canditate:", error);
-      toast.error("Error creating Examiner.", { position: "top-right" });
-    }
+    onSuccess,
+    onError
   );
 
   const onSubmit = (data) => {
