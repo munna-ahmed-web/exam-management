@@ -29,8 +29,8 @@ function AllQuestionPaperForExamineer() {
     console.log("There is an error in ")
   }
 
-  // const {} = useDeleteMutate('/api/v1/questionPaper/removeMCQ?qid=QUE00&mcqId=QUE00MCQ4',onSuccess)
-  const navigate = useNavigate();
+    //  const {} = useDeleteMutate('/api/v1/questionPaper/removeMCQ?qid=QUE00&mcqId=QUE00MCQ4',onSuccess)
+     const navigate = useNavigate();
 
   useEffect(() => {
     if (data?.data) {

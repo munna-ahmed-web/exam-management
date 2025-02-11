@@ -60,7 +60,7 @@ function CreateQuestionPaper() {
   const onError = () =>{
 
   }
-    const {mutate,isPending} = usePostMutate('/api/v1/questionPaper/createQuestionPaper',onSuccess,onError)
+  const {mutate,isPending} = usePostMutate('/api/v1/questionPaper/createQuestionPaper',onSuccess,onError)
     
     const handleSubmit = async (e) => {
       // console.log(totalMark,"totalMark")
@@ -69,12 +69,12 @@ function CreateQuestionPaper() {
       const data = {
         subject,
         duration: parseInt(duration),
-        examineeId,
+        // examineeId,
         totalMarks: parseInt(totalMarks),
         MCQSet: questions,
       };
       mutate(data)
-      console.log(data)
+      console.log("dsadsahfdkjashdkfhds",data)
     }
 
   return (
@@ -109,7 +109,7 @@ function CreateQuestionPaper() {
           />
         </div>
 
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label htmlFor="examineeId" className="block text-sm font-medium text-gray-700">
             Examinee ID
           </label>
@@ -121,7 +121,7 @@ function CreateQuestionPaper() {
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             required
           />
-        </div>
+        </div> */}
 
         <div className="mb-4">
           <label htmlFor="totalMarks" className="block text-sm font-medium text-gray-700">
