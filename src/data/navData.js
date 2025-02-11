@@ -41,8 +41,8 @@ export const navBarItemsList = [
       },
       {
         id: generateRandomID(),
-        label: "Question Paper for Candidate",
-        href: "/allQuestionPapersOfExaminee",
+        label: "Question Paper for Examiner",
+        href: "/allQuestionPapersOfExaminer",
       },
     ],
   },

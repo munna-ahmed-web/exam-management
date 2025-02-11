@@ -11,7 +11,7 @@ import SignUp from "../pages/SignUp";
 import QuestionDetails from "../pages/QuestionDetails";
 import AllQuestionPaperForExamineer from "../pages/AllQuestionPaperForExamineer";
 import SingleQuestionPaperForExamineer from "../pages/SingleQuestionPaperForExamineer";
-import AllQuestionPapersOfExaminee from "../pages/AllQuestionPapersOfExaminee";
+import AllQuestionPapersOfExaminer from "../pages/AllQuestionPapersOfExaminee";
 import SearchQuestionPaperbyExamineer from "../pages/SearchQuestionPaperbyExamineer";
 
 import UserManagement from "../pages/Users";
@@ -23,6 +23,7 @@ import OnlyForAdmin from "../components/shared/OnlyForAdmin";
 import OnlyForExaminer from "../components/shared/OnlyForExaminer";
 import CreateExaminer from "../pages/CreateExaminer";
 import QuestionDetailsForExamineer from "../pages/QuestionDetailsForExamineer";
+import QuestionEdit from "../pages/QuestionEdit";
 
 const routes = createBrowserRouter([
   {
@@ -109,8 +110,8 @@ const routes = createBrowserRouter([
       },
       {
         index: true,
-        path: "/allQuestionPapersOfExaminee",
-        element: <AllQuestionPapersOfExaminee />,
+        path: "/allQuestionPapersOfExaminer",
+        element: <AllQuestionPapersOfExaminer />,
       },
       {
         index: true,
@@ -126,6 +127,11 @@ const routes = createBrowserRouter([
         index: true,
         path: "/questionDetails/:id",
         element: <QuestionDetailsForExamineer />,
+      },
+      {
+        index: true,
+        path: "/question/:id/edit",
+        element: <QuestionEdit />,
       },
     ],
   },

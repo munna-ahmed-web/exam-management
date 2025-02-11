@@ -29,7 +29,7 @@ const QuestionDetails = () => {
     }
     if (timeLeft === 0) {
       setTimeUp(true);
-      setSubmitted(true); 
+      setSubmitted(true);
     }
   }, [quizStarted, timeLeft, submitted]);
 
@@ -115,7 +115,7 @@ const QuestionDetails = () => {
                                 handleOptionChange(q.mcqId, option)
                               }
                               className="h-4 w-4 rounded-full border-2 border-gray-500 checked:bg-green-600 checked:border-green-600 focus:ring-green-600"
-                              disabled={timeUp} 
+                              disabled={timeUp}
                             />
                             <span>{option}</span>
                           </label>
@@ -134,7 +134,9 @@ const QuestionDetails = () => {
                 <div className="text-center">
                   <h2 className="text-xl font-bold mb-4 ">Quiz Results</h2>
                   {timeUp ? (
-                    <p className="text-lg text-red-600 mb-6">Your time is up!</p> 
+                    <p className="text-lg text-red-600 mb-6">
+                      Your time is up!
+                    </p>
                   ) : (
                     <p className="text-lg mb-6">
                       You scored {calculateScore()} out of {questions.length}
