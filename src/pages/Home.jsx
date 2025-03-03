@@ -1,103 +1,104 @@
-import { Input, Pagination, Select, SelectItem, Spinner } from "@heroui/react";
-import useFetchQuery from "../hooks/shared/useFetch";
-import { useState } from "react";
 import CommonWrapper from "../components/CommonWrapper";
-import { categoryData, PerPageData } from "../enums/sortingData";
-import ExamCard from "../components/home/ExamCard";
+import { Button, Spinner } from "@heroui/react";
+import { Link } from "react-router-dom";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardTitle,
+} from "../components/ui/card";
+import { Pagination, Input } from "@heroui/react";
+import useFetchQuery from "../hooks/shared/useFetch";
+import DataNotFound from "../components/shared/DataNotFound";
+import LoadingSpinner from "../components/shared/LoadingSpinner";
+import { useEffect, useState } from "react";
 
 const Home = () => {
-  const [category, setCategory] = useState("");
-  const [page, setPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemPerpage, setItemPerpage] = useState(5);
+  const [totalCount, setTotalCount] = useState(63);
   const [searchQuery, setSearchQuery] = useState("");
-  const [perPage, setPerPage] = useState(5);
 
-  const queryParams = {
-    searchTerm: searchQuery,
-    limit: perPage,
-    page: page,
-  };
+  const { data, isLoading, isSuccess, refetch } = useFetchQuery(
+    "/api/v1/questionPaper/getAllQuestionPapersForCandidate",
+    { page: currentPage, limit: itemPerpage, searchTerm: searchQuery }
+  );
 
-  if (category) {
-    queryParams.category = category;
-  }
+  const handleSearchQuery = (e) => {
+    const value = e.target.value;
 
-  const { data, isSuccess, isLoading } = useFetchQuery("jobs", queryParams);
-  const onCategoryChange = (value) => {
-    if (value == "All") {
-      console.log(value);
-
-      setCategory("");
+    if (value) {
+      setSearchQuery(value);
     } else {
-      const valueArray = value.split(",");
-      console.log(valueArray);
-      setCategory(valueArray);
+      setSearchQuery("");
     }
   };
-  if (isSuccess) {
-    console.log(data);
-  }
 
-  const OnSearchChnage = (value) => {
-    setPage(1);
-    setSearchQuery(value);
-  };
+  if (isLoading) return <LoadingSpinner />;
+
   return (
     <>
-      <CommonWrapper className="flex gap-8">
-        <ExamCard />
-        <Input
-          isClearable
-          onChange={(e) => {
-            OnSearchChnage(e.target.value);
-          }}
-          label="Search"
-          placeholder="Type to search..."
-          radius="lg"
-        />
-        <Select
-          selectionMode="multiple"
-          defaultSelectedKeys={[`All`]}
-          onChange={(e) => {
-            onCategoryChange(e.target.value);
-          }}
-          className="max-w-xs"
-          label="Category"
-        >
-          {categoryData.map((animal) => (
-            <SelectItem key={animal.key}>{animal.label}</SelectItem>
-          ))}
-        </Select>
+      <CommonWrapper>
+        {data?.data?.length > 0 && (
+          <Card className=" flex justify-center">
+            <div className="w-1/2 p-2">
+              <Input
+                isClearable
+                value={searchQuery}
+                onChange={handleSearchQuery}
+                placeholder="Search Questions..."
+                radius="lg"
+              />
+            </div>
+          </Card>
+        )}
+      </CommonWrapper>
+      {isSuccess && data?.data?.length > 0 ? (
+        <CommonWrapper className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+          {data.data.map((item) => (
+            <Card
+              key={item.id}
+              className="hover:shadow-lg md:hover:scale-105 hover:shadow-primary/50 transition-all duration-300 flex flex-col"
+            >
+              <CardTitle>
+                <h2 className="p-6">{item.subject}</h2>
+              </CardTitle>
 
-        <Select
-          defaultSelectedKeys={[`${perPage}`]}
-          onChange={(e) => {
-            setPerPage(e.target.value);
-          }}
-          className="max-w-xs"
-          label="Per Page"
-        >
-          {PerPageData.map((animal) => (
-            <SelectItem key={animal.key}>{animal.label}</SelectItem>
+              <CardDescription>
+                <p className="px-6 text-lg flex-grow">
+                  Study the subject with essential question papers to excel in
+                  exams.
+                </p>
+              </CardDescription>
+
+              <CardContent className="flex gap-2 pt-6 flex-shrink-0">
+                <p>Marks: {item.totalMarks} |</p>
+                <p> Time: {item.duration} min</p>
+              </CardContent>
+
+              <CardFooter className="flex justify-center">
+                <Button showAnchorIcon color="success" variant="solid">
+                  <Link to={`/question/${item.id}`}>See More</Link>
+                </Button>
+              </CardFooter>
+            </Card>
           ))}
-        </Select>
-      </CommonWrapper>
-      <CommonWrapper>
-        {isLoading && <Spinner />}
-        {!isLoading && isSuccess && <> Data: {data?.data?.length}</>}
-      </CommonWrapper>
-      <CommonWrapper>
-        <Pagination
-          page={page}
-          onChange={setPage}
-          classNames={{
-            wrapper: "gap-0 overflow-visible h-8 rounded border border-divider",
-            item: "w-8 h-8 text-small rounded-none bg-transparent",
-            cursor:
-              "bg-gradient-to-b shadow-lg from-default-500 to-default-800 dark:from-default-300 dark:to-default-100 text-white font-bold",
-          }}
-          total={Math.ceil(data?.meta?.total / perPage)}
-        />
-      </CommonWrapper>
+        </CommonWrapper>
+      ) : (
+        <DataNotFound />
+      )}
+      {data?.data?.length > 0 && (
+        <CommonWrapper className="flex justify-center mt-6">
+          <Pagination
+            page={currentPage}
+            total={Math.ceil(totalCount / itemPerpage)}
+            renderItem={itemPerpage}
+            onChange={setCurrentPage}
+            color="success"
+          />
+        </CommonWrapper>
+      )}
     </>
   );
 };

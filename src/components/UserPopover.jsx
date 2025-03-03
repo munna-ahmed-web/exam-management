@@ -4,19 +4,21 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+} from "@/components/ui/popover";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import { Separator } from './ui/separator';
+import { Separator } from "./ui/separator";
 
-import { ModeToggle } from './ui/ModeToggle';
-import { Button } from '@heroui/react';
+import { ModeToggle } from "./ui/ModeToggle";
+import { Button } from "@heroui/react";
+import { useNavigate } from "react-router-dom";
 
 const UserPopover = ({ user, logout }) => {
+  const navigate = useNavigate();
   const handleLogout = () => {
     logout()
       .then(() => {
-        console.log('User logged out');
+        console.log("User logged out");
       })
       .catch((err) => {
         console.error(err);
@@ -25,7 +27,7 @@ const UserPopover = ({ user, logout }) => {
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild className="cursor-pointer">
         <Avatar>
           <AvatarImage src={user?.avatar} />
           <AvatarFallback>CN</AvatarFallback>
@@ -45,10 +47,18 @@ const UserPopover = ({ user, logout }) => {
           <Button
             fullWidth
             variant="light"
-            className=" bg-[#27272A] rounded-xl py-1 px-4 text-white"
+            className=" bg-[#27272A] rounded-xl py-1 px-4 text-white mt-2"
             onClick={() => handleLogout()}
           >
             Logout
+          </Button>
+          <Button
+            fullWidth
+            variant="light"
+            className=" bg-[#27272A] rounded-xl py-1 px-4 text-white mt-2"
+            onPress={() => navigate("/me/update")}
+          >
+            Profile
           </Button>
         </div>
       </PopoverContent>

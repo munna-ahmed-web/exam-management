@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
-import { AuthContext } from '@/hooks/AuthContextProvider';
-import LoaderScreen from '@/others/LoadingScreen';
-import {  useContext } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
-
-
+import { AuthContext } from "@/hooks/AuthContextProvider";
+import LoaderScreen from "@/others/LoadingScreen";
+import { useContext } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export default function PrivateAdminRoute({ children }) {
+  const token = Cookies.get("user");
+  const role = Cookies.get("userRole");
+
   const { pathname } = useLocation();
   const { user, loginChecking } = useContext(AuthContext);
   console.log(user);
@@ -14,13 +16,17 @@ export default function PrivateAdminRoute({ children }) {
     return <LoaderScreen />;
   }
 
-  if (!user) {
-    return <Navigate to={'/login'} replace={true} state={{ path: pathname }} />;
+  if (!token) {
+    return <Navigate to={"/login"} replace={true} state={{ path: pathname }} />;
   }
 
-  if (user?.role != 'admin') {
+  if (role != "admin") {
     return (
-      <Navigate to={'/dashboard'} replace={true} state={{ path: pathname }} />
+      <Navigate
+        to={"/onlyForAdmin"}
+        replace={true}
+        state={{ path: pathname }}
+      />
     );
   }
   return children;

@@ -1,5 +1,5 @@
 const ExamCard = () => {
-  return <div>Exam Card</div>;
+  return <div>Exam Card updated</div>;
 };
 
 export default ExamCard;

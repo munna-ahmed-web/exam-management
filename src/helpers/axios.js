@@ -5,6 +5,20 @@ const Axios = axios.create({
   withCredentials: true,
 });
 
+// Axios.interceptors.request.use(
+//   (config) => {
+//     const token = Cookies.get("user"); // Retrieve token from cookies
+//     if (token) {
+//       config.headers["Authorization"] = `Bearer ${token}`; // Attach token to request headers
+//     }
+
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
+
 const getData = async (url, queryParams) => {
   const response = await Axios.get(url, { params: queryParams });
   console.log(response.data);

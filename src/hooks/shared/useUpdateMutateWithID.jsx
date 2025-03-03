@@ -6,7 +6,8 @@ import useAxiosSecure from '../useAxios';
 const useUpdateMutateWithID = (
   route,
   onSuccess= () => {},
-  onError= () => {}
+  onError= () => {},
+  params = {}
 ) => {
   const Axios = useAxiosSecure();
   const token = Cookies.get('user');
@@ -14,10 +15,11 @@ const useUpdateMutateWithID = (
 
   const { mutate, isPending } = useMutation({
     mutationFn: (obj) =>
-      Axios.patch(route + obj.id, obj, {
+      Axios.patch(route, obj, {
         headers: {
           Authorization: token,
         },
+        params
       }),
     onSuccess: (mutatedData) => {
       queryClient.invalidateQueries({ queryKey: ['users'] });
